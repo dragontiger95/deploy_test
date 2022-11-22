@@ -24,6 +24,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push docker image to Amazon ECR
+        id: build
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
@@ -31,3 +32,11 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          echo ::set-output name=url::$REGISTRY/$REPOSITORY
+
+      # - name: Deploy
+      #   uses: ladislas14/kubernetes-action@master
+      #   with:
+      #     args: set image deployment/deploy_test deploy_test=${{ steps.build.outputs.url }} -n staging --record
+      #   env:
+      #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
