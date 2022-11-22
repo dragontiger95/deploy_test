@@ -35,7 +35,7 @@ jobs:
           echo ::set-output name=url::$REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Deploy <master>
-        uses: ladislas14/kubernetes-action@master
+        uses: Consensys/kubernetes-action@master
         with:
           args: set image deployment/datepop-drf-test datepop-drf-test=${{ steps.build.outputs.url }} -n datepop --record
         env:
