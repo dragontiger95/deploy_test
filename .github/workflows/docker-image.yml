@@ -26,6 +26,6 @@ jobs:
           REPOSITORY: deploy_test
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REPOSITORY .
+          docker build -t deploy_test .
           # docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY
           # docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
