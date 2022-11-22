@@ -37,6 +37,6 @@ jobs:
       - name: Deploy <master>
         uses: ladislas14/kubernetes-action@master
         with:
-          args: set image deployment/deploy_test deploy_test=${{ steps.build.outputs.url }} -n datepop --record
+          args: set image deployment/datepop-drf-test datepop-drf-test=${{ steps.build.outputs.url }} -n datepop --record
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
